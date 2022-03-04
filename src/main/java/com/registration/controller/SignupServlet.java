@@ -44,7 +44,7 @@ public class SignupServlet extends HttpServlet {
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.auth", "true");       //for authentication purpose
         FileInputStream fileInputStream = new FileInputStream(
-                "/home/mustak/IdeaProjects/SendMail/src/main/resources/config.properties");
+                "/home/mustak/IdeaProjects/AdvJavaProject/src/main/resources/config.properties");
 
         properties.load(fileInputStream);
         final String username = properties.getProperty("username");

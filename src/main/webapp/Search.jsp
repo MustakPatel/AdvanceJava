@@ -35,6 +35,16 @@
            statement.setString(1,"%"+name+"%");
            ResultSet resultset = statement.executeQuery();
     %>
+       <br>
+       <p class="searchTitle">
+                <u>
+                    <b>You Searched : </b><span class="searchName"><%= name %></span>
+                </u>
+
+       </p>
+
+
+       <br>
            <table class="table table-bordered">
                  <thead>
                        <tr>

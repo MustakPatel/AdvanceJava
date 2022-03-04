@@ -91,3 +91,9 @@ table.table td .add {
 .table-responsive{
 width: 118%;
 }
+.searchName{
+    color:gray;
+}
+.searchTitle{
+    color:red;
+}

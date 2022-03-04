@@ -28,27 +28,17 @@ public class HomeProfilePage extends HttpServlet {
 
         if (displayData.isDataDisplay()) {        //if condition true it means data is being Displayed
             System.out.println("successfull data display");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("HomePage.jsp");     //(HomePage.jsp)it's main profile page
+            requestDispatcher.include(req, resp);
+            System.out.println("again come in HomePage");
         } else {
             System.out.println("Data is not showing");
         }
 //-------------------------use for checking session--------------------------------------------
 
-        HttpSession httpSession = req.getSession(false);
 
-        if (httpSession != null) {
 
-            String mail = (String) httpSession.getAttribute("userName");
-            System.out.println(mail);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("HomePage.jsp");     //(HomePage.jsp)it's main profile page
-            requestDispatcher.include(req, resp);
-            System.out.println("again come in HomePage");
 
-        } else {
-            out.println("please login first");
-            System.out.println("session is not working");
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");       //(index.jsp) it's login page
-            requestDispatcher.include(req, resp);
 
-        }
     }
 }

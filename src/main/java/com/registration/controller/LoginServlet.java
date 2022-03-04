@@ -39,8 +39,7 @@ public class LoginServlet extends HttpServlet {
             out.println("</script>");
 
             httpSession.setAttribute("userName", userLogin.getLoginId());
-            httpSession.setMaxInactiveInterval(2);
-
+            httpSession.setMaxInactiveInterval(300);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("profile");
             requestDispatcher.include(req, resp);
             System.out.println("it's work");

@@ -25,6 +25,7 @@
  <%
     String uname = (String) session.getAttribute("userName");
 
+
     if (uname == null) {
         session.setAttribute("errorMessage", "please login first you are new user");
         response.sendRedirect("index.jsp");
