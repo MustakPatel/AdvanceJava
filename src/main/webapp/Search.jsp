@@ -1,8 +1,5 @@
-<%@ page errorPage="Error.jsp" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="main.java.com.registration.*" %>
-<%@ page import="main.java.com.registration.dbconnection.*" %>
-<% Class.forName("com.mysql.jdbc.Driver"); %>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="com.registration.model.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,59 +20,38 @@
 
 <body>
 <%@ include file="Navbar.jsp" %>
-    <%
-           String name = request.getParameter("search");
-           Connection connection = DriverManager.getConnection(
-             "jdbc:mysql://localhost:3306/javaproject", "root", "123456");
+<% ArrayList<Party> std = (ArrayList<Party>) request.getAttribute("searchData");%>
+<br>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>zip</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Phone</th>
 
-           String sql = "SELECT * FROM userlogin u INNER JOIN party p ON u.partyId = p.partyId "+
-                        " WHERE concat(firstName,' ',lastname) LIKE ?";
-
-           PreparedStatement statement = connection.prepareStatement(sql);
-           statement.setString(1,"%"+name+"%");
-           ResultSet resultset = statement.executeQuery();
-    %>
-       <br>
-       <p class="searchTitle">
-                <u>
-                    <b>You Searched : </b><span class="searchName"><%= name %></span>
-                </u>
-
-       </p>
-
-
-       <br>
-           <table class="table table-bordered">
-                 <thead>
-                       <tr>
-                           <th>Id</th>
-                           <th>First Name</th>
-                           <th>Last Name</th>
-                           <th>Address</th>
-                           <th>City</th>
-                           <th>zip</th>
-                           <th>State</th>
-                           <th>Country</th>
-                           <th>Phone</th>
-                           <th>Email Id</th>
-                       </tr>
-                 </thead>
-                 <tbody>
-                        <% while(resultset.next()){ %>
-                            <tr>
-                                <td> <%= resultset.getInt("partyId") %></td>
-                                <td> <%= resultset.getString("firstName") %></td>
-                                <td> <%= resultset.getString("lastName") %></td>
-                                <td> <%= resultset.getString("address") %></td>
-                                <td> <%= resultset.getString("city") %></td>
-                                <td>  <%= resultset.getString("state") %></td>
-                                <td> <%= resultset.getString("country") %></td>
-                                <td> <%= resultset.getString("zip") %></td>
-                                <td> <%= resultset.getString("phone") %></td>
-                                <td> <%= resultset.getString("userLoginid") %></td>
-                            </tr>
-                        <% } %>
-                 </tbody>
-           </table>
+        </tr>
+    </thead>
+    <tbody>
+     <% for(Party s:std){%>
+        <tr>
+            <td> <%=s.getPartyId()%></td>
+            <td> <%=s.getFirstName()%></td>
+            <td> <%=s.getLastName()%></td>
+            <td> <%=s.getAddress()%></td>
+            <td> <%=s.getCity()%></td>
+            <td> <%=s.getZip()%></td>
+            <td> <%=s.getState()%></td>
+            <td> <%=s.getCountry()%></td>
+            <td> <%=s.getPhone()%></td>
+        </tr>
+     <% } %>
+    </tbody>
+</table>
 </body>
 </html>

@@ -1,8 +1,6 @@
 <%@ page errorPage="Error.jsp" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="main.java.com.registration.*" %>
-<%@ page import="main.java.com.registration.dbconnection.*" %>
-<% Class.forName("com.mysql.jdbc.Driver"); %>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="com.registration.model.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,22 +25,13 @@
 
 
     if (uname == null) {
+
         session.setAttribute("errorMessage", "please login first you are new user");
         response.sendRedirect("index.jsp");
     }
  %>
 <body>
-
-  <%
-           Connection connection = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/javaproject", "root", "123456");
-
-           Statement statement = connection.createStatement() ;
-           ResultSet resultset = statement.executeQuery("SELECT p.partyId, firstName, lastName, address, city," +
-                                                         " zip, state, country, phone,userLoginId FROM party p," +
-                                                         " userlogin u WHERE p.partyId = u.partyId") ;
-  %>
-
+<% ArrayList<Party> std = (ArrayList<Party>) request.getAttribute("studentList");%>
 <%@ include file="Navbar.jsp" %>
 
 <div class="container-lg">
@@ -65,32 +54,32 @@
                         <th>State</th>
                         <th>Country</th>
                         <th>Phone</th>
-                        <th>Email Id</th>
+                        <th>Action</th>
+
 
                     </tr>
                 </thead>
                 <tbody>
-                 <% while(resultset.next()){ %>
+                 <% for(Party s:std){%>
                     <tr>
-                        <td> <%= resultset.getInt(1) %></td>
-                        <td> <%= resultset.getString(2) %></td>
-                        <td> <%= resultset.getString(3) %></td>
-                        <td> <%= resultset.getString(4) %></td>
-                        <td> <%= resultset.getString(5) %></td>
-                        <td>  <%= resultset.getString(6) %></td>
-                        <td> <%= resultset.getString(7) %></td>
-                        <td> <%= resultset.getString(8) %></td>
-                        <td> <%= resultset.getString(9) %></td>
-                        <td> <%= resultset.getString(10) %></td>
+                        <td> <%=s.getPartyId()%></td>
+                        <td> <%=s.getFirstName()%></td>
+                        <td> <%=s.getLastName()%></td>
+                        <td> <%=s.getAddress()%></td>
+                        <td> <%=s.getCity()%></td>
+                        <td> <%=s.getZip()%></td>
+                        <td> <%=s.getState()%></td>
+                        <td> <%=s.getCountry()%></td>
+                        <td> <%=s.getPhone()%></td>
+
                         <td>
                             <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                            <a href="Update.jsp?id=<%=resultset.getInt("partyId")%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="DeleteServlet?id=<%=resultset.getInt("partyId")%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            <a href="ModifyServlet?id=<%=s.getPartyId()%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="DeleteServlet?id=<%=s.getPartyId()%>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
                     </tr>
-                     <% } %>
-
-                </tbody>
+                 <% } %>
+               </tbody>
             </table>
         </div>
     </div>

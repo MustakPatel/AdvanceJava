@@ -25,7 +25,7 @@
                 <a class="nav-link" href="https://www.hotwaxsystems.com/">HotWax <span class="sr-only">System</span></a>
             </li>
         </ul>
-        <form action="Search.jsp" class="form-inline my-2 my-lg-0" method="post">
+        <form action="SearchServlet" class="form-inline my-2 my-lg-0" method="post">
             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search by username or first,last name">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>

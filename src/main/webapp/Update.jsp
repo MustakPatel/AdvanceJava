@@ -1,7 +1,5 @@
-<%@ page import="java.sql.*" %>
-<%@ page import="main.java.com.registration.*" %>
-<%@ page import="main.java.com.registration.dbconnection.*" %>
-<% Class.forName("com.mysql.jdbc.Driver"); %>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="com.registration.model.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,18 +21,9 @@
 <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 </head>
 <body>
+<% ArrayList<Party> std = (ArrayList<Party>) request.getAttribute("userData");%>
 <%@ include file="Navbar.jsp" %>
-  <%
-    String id = request.getParameter("id");
-    Connection connection = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/javaproject", "root", "123456");
-    Statement statement = connection.createStatement() ;
-    ResultSet resultSet = statement.executeQuery("SELECT p.partyId, firstName, lastName, address, city," +
-                                                      " zip, state, country, phone,userLoginId FROM party p," +
-                                                       " userlogin u WHERE p.partyId = u.partyId AND p.partyId ="+id);
 
-    while(resultSet.next()){
-  %>
  <div class="main">
      <!-- Sign up form -->
         <section class="signup">
@@ -43,64 +32,61 @@
                     <div class="signup-form">
                         <h2 class="form-title">Update Profile</h2>
                             <form method="get" action="UpdateServlet" class="register-form" id="register-form">
+                                <% for(Party s:std){%>
                                  <div class="form-group">
                                     <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="hidden" name="partyId" value="<%=resultSet.getInt("partyId") %>">
+                                    <input type="hidden" name="partyId" value="<%=s.getPartyId()%>">
                                  </div>
 
                                 <div class="form-group">
                                     <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="firstName" value="<%=resultSet.getString("firstName") %>">
+                                    <input type="text" name="firstName" value="<%=s.getFirstName()%>">
                                 </div>
 
                                 <div class="form-group">
                                     <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="lastName" value="<%=resultSet.getString("lastName") %>">
+                                    <input type="text" name="lastName" value="<%=s.getLastName()%>">
                                 </div>
 
                                 <div class="form-group">
                                     <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="address" value="<%=resultSet.getString("address") %>">
+                                    <input type="text" name="address" value="<%=s.getAddress()%>">
                                 </div>
 
                                 <div class="form-group">
                                     <label><i class="zmdi zmdi-city"></i></label>
-                                    <input type="text" name="city" value="<%=resultSet.getString("city") %>">
+                                    <input type="text" name="city" value="<%=s.getCity()%>">
                                 </div>
 
                                 <div class="form-group">
                                     <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="zip" value="<%=resultSet.getString("zip") %>">
+                                    <input type="text" name="zip" value="<%=s.getZip()%>">
                                 </div>
 
                                 <div class="form-group">
                                     <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="state" value="<%=resultSet.getString("state") %>">
+                                    <input type="text" name="state" value="<%=s.getState()%>">
                                 </div>
 
                                 <div class="form-group">
                                     <label><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="country" value="<%=resultSet.getString("country") %>">
+                                    <input type="text" name="country" value="<%=s.getCountry()%>">
                                 </div>
 
                                 <div class="form-group">
                                     <label><i class="zmdi zmdi-phone"></i></label>
-                                    <input type="text" name="phone" value="<%=resultSet.getString("phone") %>">
-                                </div>
-
-                                <div class="form-group">
-                                    <label><i class="zmdi zmdi-email"></i></label>
-                                    <input type="email" name="email" value="<%=resultSet.getString("userLoginId") %>">
+                                    <input type="text" name="phone" value="<%=s.getPhone()%>">
                                 </div>
                                 <div class="form-group form-button">
                                     <input type="submit" name="update" id="signup" class="form-submit" value="Update"/>
                                 </div>
+                               <% } %>
                             </form>
                     </div>
                 </div>
             </div>
         </section>
  </div>
-<% } %>
+
 </body>
 </html>
