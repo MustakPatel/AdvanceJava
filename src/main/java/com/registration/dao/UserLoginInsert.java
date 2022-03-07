@@ -5,6 +5,7 @@ import com.registration.model.UserLogin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class UserLoginInsert {
 
@@ -36,7 +37,7 @@ public class UserLoginInsert {
             statement.executeUpdate();
             isDataInserted = true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

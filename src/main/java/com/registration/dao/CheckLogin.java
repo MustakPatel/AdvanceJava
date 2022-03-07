@@ -6,6 +6,7 @@ import com.registration.model.UserLogin;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 // this class will be used for checking  is user exist or not in the sense of login
@@ -14,7 +15,7 @@ public class CheckLogin {
 
     Connection connection;
 
-    public CheckLogin(Connection connection) throws IOException {       //connection will be initialized by ConnectionProvider class
+    public CheckLogin(Connection connection) {       //connection will be initialized by ConnectionProvider class
         this.connection = connection;
     }
 
@@ -45,7 +46,7 @@ public class CheckLogin {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

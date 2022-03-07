@@ -5,6 +5,7 @@ import com.registration.model.Party;
 import com.registration.model.UserLogin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class UpdateDetails {
 
@@ -50,7 +51,7 @@ public class UpdateDetails {
                 System.out.println("There is a problem in updating Record.");
             }
             updatedData = true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return updatedData;

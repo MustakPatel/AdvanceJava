@@ -4,6 +4,7 @@ import com.registration.model.Party;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 // it is being used for inserting data in mysql : Party Table
 public class PartyDao {
@@ -61,7 +62,7 @@ public class PartyDao {
 
             isUserDataInserted = true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

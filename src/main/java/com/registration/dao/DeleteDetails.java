@@ -4,6 +4,7 @@ import com.registration.model.Party;
 
 import javax.servlet.annotation.WebServlet;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 // this class will be used for deletion operation on HomePage data
@@ -30,7 +31,7 @@ public class DeleteDetails {
 
             deletedData = true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
