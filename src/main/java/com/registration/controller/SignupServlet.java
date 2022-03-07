@@ -74,7 +74,7 @@ public class SignupServlet extends HttpServlet {
 
             Transport.send(message);
             System.out.println("email send successfully");
-        } catch (Exception e) {
+        } catch (MessagingException e) {
             System.out.println(e);
         }
 
